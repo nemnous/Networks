@@ -6,8 +6,13 @@ def clientchat(c, clients):
     while True:
         try:
             msg = c.recv(1024).decode()
+            # nameSplit = msg.split(':')
+            # user = nameSplit[0]
+            # fileName = user + '.txt'
+            with open('log.txt','a') as f:
+                f.write(msg + '\n')
+                f.close()
         except:
-            msg = ''
             for key, value in clients.items():
                 if value == c:
                     discUser = key
@@ -16,12 +21,9 @@ def clientchat(c, clients):
             print(msg)
             if discUser in clients:
                 del clients[discUser]
-
             for key, value in clients.items():
                 value.send(msg.encode())
-
             break
-        # print(clients)
         for key, value in clients.items():
             value.send(msg.encode())
         
@@ -35,7 +37,7 @@ def main():
     # clients = {}
     while True:
         c, addr = s.accept()
-        message = "User name enter chey bey: \n"
+        message = "Username enter chey bey: \n"
         c.send(message.encode())
         username = c.recv(1024).decode()
         conMsg = username + ' got connected'
