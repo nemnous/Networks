@@ -9,7 +9,7 @@ def receive(s, username):
         print(str(data))
 
 def main():
-    host = '192.168.137.186'
+    host = '192.168.137.93'
     port = 5000
     s = socket.socket()
     s.connect((host, port))
