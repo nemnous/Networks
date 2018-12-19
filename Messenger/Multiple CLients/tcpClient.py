@@ -19,8 +19,15 @@ def main():
     s.send(username.encode())
     threading.Thread(target = receive, args = (s, username)).start()
     while True:
-        message = username + ':' + input()
-        s.send(message.encode())
+        inp = input()
+        message = username + ':' + inp
+        # per = inp.split(" ")
+        if inp == 'online':
+            s.send(inp.encode())
+        # elif per[0] = 'private':
+            
+        else:
+            s.send(message.encode())
     s.close()
 
 if __name__ == "__main__":

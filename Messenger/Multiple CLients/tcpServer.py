@@ -9,6 +9,13 @@ def clientchat(c, clients):
             # nameSplit = msg.split(':')
             # user = nameSplit[0]
             # fileName = user + '.txt'
+            if msg == 'online':
+                onl = ''
+                for key, value in clients.items():
+                    onl += (key + '\n')
+                c.send(onl.encode())
+                continue
+
             with open('log.txt','a') as f:
                 f.write(msg + '\n')
                 f.close()
