@@ -3,7 +3,11 @@ import threading
 
 def receive(s, username):
     while True:
-        data = s.recv(1024).decode()
+        try: 
+            data = s.recv(1024).decode()
+        except:
+            print("Server Disconnected")
+            break
         if not data:
             continue
         print(str(data))
