@@ -20,12 +20,13 @@ def main():
     threading.Thread(target = receive, args = (s, username)).start()
     while True:
         inp = input()
-        message = username + ':' + inp
-        # per = inp.split(" ")
+        message = username + '>' + inp
+        per = inp.split(" ")
         if inp == 'online':
             s.send(inp.encode())
-        # elif per[0] = 'private':
-            
+        elif per[0] == 'private':
+            print('enter message for ' + per[1])
+            s.send((per[0] + ":" + per[1] + ":" + username + '>' + input()).encode())
         else:
             s.send(message.encode())
     s.close()

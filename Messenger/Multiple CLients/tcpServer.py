@@ -9,6 +9,15 @@ def clientchat(c, clients):
             # nameSplit = msg.split(':')
             # user = nameSplit[0]
             # fileName = user + '.txt'
+            priSplit = msg.split(':')
+
+            if priSplit[0] == 'private':
+                if priSplit[1] in clients:
+                    clients[priSplit[1]].send(priSplit[2].encode())
+                else:
+                    c.send((priSplit[1] + ' is offline').encode())
+                continue
+
             if msg == 'online':
                 onl = ''
                 for key, value in clients.items():
