@@ -1,24 +1,35 @@
 import socket
 import threading
 
-
+clients = {}
 def clientchat(c, clients):
-    # print('send message after entering s first')
     while True:
+        usernMsg = []
         try:
             msg = c.recv(1024).decode()
+            usernMsg = msg.split(':')
         except:
-            print('user disconnected')
-
+            discUser = ''
+            for key, value in clients.items():
+                if value == c:
+                    discUser = key
+                    break
+            discMsg = discUser + ' got disconnected'
+            print(discMsg)
+            del clients[discUser]
+            for key, value in clients.items():
+                value.send(discMsg.encode())
+        print(clients)
         for key, value in clients.items():
             value.send(msg.encode())
+
 def main():
-    host = '10.10.8.232'
+    host = '192.168.137.186'
     port = 5000
     s = socket.socket()
     s.bind((host, port))
     s.listen()
-    clients = {}
+    # clients = {}
     while True:
         c, addr = s.accept()
         message = "User name enter chey bey: \n"
@@ -31,7 +42,6 @@ def main():
         for key, value in clients.items():
             value.send(conMsg.encode())
         threading.Thread(target = clientchat, args = (c, clients)).start()
-        
-    
+
 if __name__ == "__main__":
     main()
