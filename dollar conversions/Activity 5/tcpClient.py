@@ -1,7 +1,7 @@
 import socket
 def Main():
     host='127.0.0.1'
-    port=5000
+    port=6000
     s=socket.socket()
     s.connect((host,port))
     message=input("->")
