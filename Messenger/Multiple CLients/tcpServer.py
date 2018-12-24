@@ -57,7 +57,7 @@ def main():
     port = 5000
     print('\n \n \n ****** WELCOME TO NEMNOUS MESSENGER ****** \n \n')
     grpName = input('Enter Group Name:')
-    password = getpass.getpass('Set Password for' + grpName)
+    password = getpass.getpass('Set Password for ' + grpName)
     # print(password)
     s = socket.socket()
     print('Nemnous Messenger is ONLINE')
